@@ -84,13 +84,13 @@ class _LoginFormState extends State<LoginForm> {
                 borderRadius: BorderRadius.circular(8)),
             height: 50,
             width: size.width,
-            child:authProvider.isLoading?Center(child: CircularProgressIndicator(color: red,),): MaterialButton(
+            child:authProvider.isLoading?Center(child: CircularProgressIndicator(),): MaterialButton(
               color: green,
               onPressed: () async {
                 
                 if (emailController.text == "test_user" &&
                     passwordController.text == '12345678') {
-                  await authProvider.login(
+                  authProvider.login(
                       emailController.text, passwordController.text);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PatientScreen()));

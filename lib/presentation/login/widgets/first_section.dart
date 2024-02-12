@@ -13,8 +13,8 @@ class TopSection extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/login_background.png',
-            fit: BoxFit.fill,
-          ),
+            fit: BoxFit.fitWidth,
+          width: double.infinity,),
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,

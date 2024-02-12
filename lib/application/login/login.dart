@@ -9,23 +9,22 @@ class AuthProvider extends ChangeNotifier {
 
   AuthProvider(this._userRepository);
 
-  bool _isLoading = false;
+  bool isLoading = false;
 
-  bool get isLoading => _isLoading;
-
-  Future<void> login(String email, String password) async {
+  Future<void> login(String email, String password,) async {
     try {
-      _isLoading =
-          true;  notifyListeners();
+      isLoading =
+          true;  
 
       await _userRepository.login(email, password);
-      _isLoading = false;
+
+      isLoading = false;
       notifyListeners();
     } catch (e) {
-      _isLoading = false;
+     print('Login Error: $e');
+    }finally {
+      isLoading = false;
       notifyListeners();
-      print('Login Error: $e');
-      throw e;
     }
   }
 }

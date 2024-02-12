@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:health_portal/Data/patient/patient_repo.dart';
+import 'package:health_portal/domain/Failure/filures.dart';
 import 'package:health_portal/domain/patient/patient_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,21 +11,24 @@ class PatientProvider with ChangeNotifier {
 
   PatientProvider(this._patientRepository);
 
-  List<Patient> _patients = [];
+  Either<Failure, List<Patient>>? _patients;
   bool isLoading = false;
 
-  List<Patient> get patients => _patients;
+  Either<Failure, List<Patient>>? get patients => _patients?? Left(Failure(message: "List not loaded"));
 
-   Future<void> fetchUsers() async {
-    isLoading = true;  notifyListeners();
+  Future<void> fetchUsers() async {
+    isLoading = true;
 
     try {
       _patients = await _patientRepository.getPatient();
     } catch (e) {
-     
+      _patients = Left(Failure(message: "Failed to load data: $e"));
+ 
     } finally {
-      isLoading = false; notifyListeners();
+      isLoading = false;
+      notifyListeners();
     }
   }
-  
 }
+
+

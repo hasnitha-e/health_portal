@@ -30,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
         preferences.setString('token', response.data['token']);
         print(token);
-
+        
         return response.data;
       } else {
         throw Exception('Failed to login');

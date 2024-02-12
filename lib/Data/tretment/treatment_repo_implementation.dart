@@ -19,7 +19,7 @@ class TreatmentRepoImpl implements TreatmentRepository {
     };
     Dio dio = Dio();
     try {
-      final response = await dio.get(base_url + treatment,
+      final response = await dio.get(base_url + ApiEndpoints(). treatment,
           options: Options(headers: authHeader));
       if (response.statusCode == 200) {
         print(response.data);

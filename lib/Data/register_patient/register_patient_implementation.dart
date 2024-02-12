@@ -21,7 +21,7 @@ class RegisterPatientImplement implements  RegisterPatientRepository{
   Future<String> updatePatient(Patient patient) async {
     try {
       final response = await dio.post(
-        base_url+register,
+        base_url+ApiEndpoints() .register,
         data: patient.toJson(),
       );
 
